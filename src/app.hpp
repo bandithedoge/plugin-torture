@@ -1,6 +1,5 @@
 #pragma once
 
-#include "processor/empty.hpp"
 #define SAMPLE_RATE 44100.f
 #define BUFFER_SIZE 256
 
@@ -8,7 +7,7 @@
 #include <memory>
 #include <portaudio.h>
 
-#include "processor.hpp"
+#include "processor/empty.hpp"
 
 class App {
   public:

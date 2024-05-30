@@ -1,8 +1,6 @@
 #include "portaudio.h"
 #include <cstring>
 
-#include "../app.hpp"
-#include "../globals.hpp"
 #include "../gui.hpp"
 #include "empty.hpp"
 

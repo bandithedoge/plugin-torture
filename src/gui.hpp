@@ -1,6 +1,6 @@
 #pragma once
 
-#include "globals.hpp"
+#include "app.hpp"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl2.h"

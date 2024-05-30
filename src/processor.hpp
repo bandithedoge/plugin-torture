@@ -2,7 +2,7 @@
 
 #include <portaudio.h>
 
-#include "globals.hpp"
+#include "app.hpp"
 
 struct Channels {
     float *left;
