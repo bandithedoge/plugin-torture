@@ -69,11 +69,11 @@ void Gui::render() {
             }
 
             if (ImGui::Button("LV2")) {
-                app->changeProcessor(std::make_shared<LV2Processor>());
+                app->changeProcessor(std::make_unique<LV2Processor>());
             }
             ImGui::SameLine();
             if (ImGui::Button("Empty")) {
-                app->changeProcessor(std::make_shared<EmptyProcessor>());
+                app->changeProcessor(std::make_unique<EmptyProcessor>());
             }
 
             if (app->m_processor != nullptr)

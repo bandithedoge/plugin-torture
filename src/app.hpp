@@ -16,11 +16,11 @@ class App {
 
     void stopStream();
     void startStream();
-    void changeProcessor(std::shared_ptr<Processor> newProcessor);
+    void changeProcessor(std::unique_ptr<Processor> newProcessor);
 
     float m_inputBuffer[2][BUFFER_SIZE];
     float m_outputBuffer[2][BUFFER_SIZE];
-    std::shared_ptr<Processor> m_processor = nullptr;
+    std::unique_ptr<Processor> m_processor = nullptr;
     bool m_isStreamActive = false;
 
   private:

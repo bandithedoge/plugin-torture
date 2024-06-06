@@ -45,11 +45,11 @@ void App::startStream() {
 }
 
 void App::stopStream() {
-    m_isStreamActive = false;
     Pa_StopStream(m_stream);
+    m_isStreamActive = false;
 }
 
-void App::changeProcessor(std::shared_ptr<Processor> newProcessor) {
+void App::changeProcessor(std::unique_ptr<Processor> newProcessor) {
     stopStream();
     m_processor.swap(newProcessor);
     // startStream();
