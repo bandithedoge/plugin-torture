@@ -14,8 +14,11 @@ int EmptyProcessor::processMethod(const void *input, void *output, unsigned long
     memcpy(m_inputBuffer[0], in->left, BUFFER_SIZE * sizeof(float));
     memcpy(m_inputBuffer[1], in->right, BUFFER_SIZE * sizeof(float));
 
+    memcpy(m_outputBuffer[0], m_inputBuffer[0], BUFFER_SIZE * sizeof(float));
+    memcpy(m_outputBuffer[1], m_inputBuffer[1], BUFFER_SIZE * sizeof(float));
+
     Channels *out = (Channels *)output;
-    memcpy(out->left, m_inputBuffer[0], BUFFER_SIZE * sizeof(float));
+    memcpy(out->left, m_outputBuffer[0], BUFFER_SIZE * sizeof(float));
     memcpy(out->right, m_outputBuffer[1], BUFFER_SIZE * sizeof(float));
 
     return paContinue;
