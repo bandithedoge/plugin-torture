@@ -1,13 +1,15 @@
 #pragma once
 
-#define SAMPLE_RATE 44100.f
-#define BUFFER_SIZE 256
-
-#include <lilv/lilvmm.hpp>
 #include <memory>
-#include <portaudio.h>
+#include <q_io/audio_stream.hpp>
 
-#include "processor/empty.hpp"
+#include "processor.hpp"
+
+class Stream : public cycfi::q::audio_stream {
+  public:
+    Stream();
+    void process(in_channels const &in, out_channels const &out) override;
+};
 
 class App {
   public:
@@ -18,15 +20,11 @@ class App {
     void startStream();
     void changeProcessor(std::unique_ptr<Processor> newProcessor);
 
-    float m_inputBuffer[2][BUFFER_SIZE];
-    float m_outputBuffer[2][BUFFER_SIZE];
     std::unique_ptr<Processor> m_processor = nullptr;
     bool m_isStreamActive = false;
 
   private:
-    PaStream *m_stream;
-    Lilv::World m_lilvWorld;
-    PaStreamParameters m_inputParams, m_outputParams;
+    Stream m_stream;
 };
 
 inline std::unique_ptr<App> g_app;

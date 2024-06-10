@@ -1,21 +1,16 @@
 #pragma once
 
-#include <portaudio.h>
+#include <q/support/audio_stream.hpp>
 
-#include "app.hpp"
+#include "main.hpp"
 
-struct Channels {
-    float *left;
-    float *right;
-};
-
-class Processor {
+class Processor : public cycfi::q::audio_stream_base {
   public:
     Processor();
     ~Processor();
 
-    virtual int processMethod(const void *input, void *output, unsigned long bufferSize,
-                              const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags);
+    void process(in_channels const &in, out_channels const &out) override;
+    virtual void processMethod(in_channels const &in, out_channels const &out);
     virtual void render();
 
     float m_inputBuffer[2][BUFFER_SIZE];

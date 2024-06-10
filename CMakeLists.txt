@@ -4,7 +4,10 @@ set(CMAKE_CXX_STANDARD 23)
 set(BUILD_SHARED_LIBS OFF)
 
 add_subdirectory(glfw)
-add_subdirectory(portaudio)
+
+set(Q_BUILD_EXAMPLES OFF)
+set(Q_BUILD_TEST OFF)
+add_subdirectory(q)
 
 include_directories(
   PUBLIC
@@ -20,6 +23,7 @@ target_link_libraries(imgui
 
 target_link_libraries(plugintorture
   PUBLIC
-    PortAudio
+    libq
+    libqio
     glfw
     imgui)

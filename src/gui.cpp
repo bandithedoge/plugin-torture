@@ -1,8 +1,11 @@
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl2.h>
 #include <cstring>
 #include <fmt/core.h>
 
 #include "app.hpp"
 #include "gui.hpp"
+#include "processor/empty.hpp"
 #include "processor/lv2.hpp"
 
 Gui::Gui() {
@@ -83,8 +86,8 @@ void Gui::render() {
                 if (ImPlot::BeginPlot("input", ImVec2(-1, -1))) {
                     ImPlot::SetupAxes("time", "amplitude");
                     ImPlot::SetupAxesLimits(0, BUFFER_SIZE, -2, 2, ImPlotCond_Always);
-                    ImPlot::PlotLine("left", app->m_processor->m_outputBuffer[0], BUFFER_SIZE);
-                    ImPlot::PlotLine("right", app->m_processor->m_outputBuffer[1], BUFFER_SIZE);
+                    ImPlot::PlotLine("in", app->m_processor->m_inputBuffer[0], BUFFER_SIZE);
+                    ImPlot::PlotLine("out", app->m_processor->m_outputBuffer[0], BUFFER_SIZE);
                     ImPlot::EndPlot();
                 }
         }

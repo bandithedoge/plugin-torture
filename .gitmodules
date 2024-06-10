@@ -4,3 +4,6 @@
 [submodule "glfw"]
 	path = glfw
 	url = https://github.com/glfw/glfw
+[submodule "q"]
+	path = q
+	url = https://github.com/cycfi/q

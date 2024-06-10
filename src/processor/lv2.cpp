@@ -36,20 +36,15 @@ void LV2Processor::loadPlugin(const char *uri) {
     g_app.get()->startStream();
 }
 
-int LV2Processor::processMethod(const void *input, void *output, unsigned long bufferSize,
-                                const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags) {
-    Channels *in = (Channels *)input;
-    memcpy(m_inputBuffer[0], in->left, BUFFER_SIZE * sizeof(float));
-    memcpy(m_inputBuffer[1], in->right, BUFFER_SIZE * sizeof(float));
+void LV2Processor::processMethod(in_channels const &in, out_channels const &out) {
+    memcpy(m_inputBuffer[0], in[0].begin(), BUFFER_SIZE * sizeof(float));
+    memcpy(m_inputBuffer[1], in[1].begin(), BUFFER_SIZE * sizeof(float));
 
     if (m_instance != nullptr)
-        m_instance.run(bufferSize);
+        m_instance.run(BUFFER_SIZE);
 
-    Channels *out = (Channels *)output;
-    memcpy(out->left, m_inputBuffer[0], BUFFER_SIZE * sizeof(float));
-    memcpy(out->right, m_outputBuffer[1], BUFFER_SIZE * sizeof(float));
-
-    return paContinue;
+    memcpy(out[0].begin(), m_outputBuffer[0], BUFFER_SIZE * sizeof(float));
+    memcpy(out[1].begin(), m_outputBuffer[1], BUFFER_SIZE * sizeof(float));
 }
 
 void LV2Processor::render() {

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <q/support/audio_stream.hpp>
+
 #include "../processor.hpp"
 
 class EmptyProcessor : public Processor {
@@ -7,7 +9,6 @@ class EmptyProcessor : public Processor {
     EmptyProcessor();
     ~EmptyProcessor();
 
-    int processMethod(const void *input, void *output, unsigned long bufferSize,
-                      const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags) override;
+    void processMethod(in_channels const &in, out_channels const &out) override;
     void render() override;
 };
